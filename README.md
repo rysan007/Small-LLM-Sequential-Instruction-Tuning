@@ -21,9 +21,10 @@ LLM_Training_Project/
 │
 ├── logs/
 │   ├── inference_results/    # The six generated CP0/CP1/CP2 .json outputs
-│   ├── judge_cp0_vs_cp1.json # Judge score files
-│   ├── judge_cp1_vs_cp2.json 
-│   ├── judge_cp1_vs_cp2_json.json
+│   ├── judge_results/    
+│       ├── judge_cp0_vs_cp1.json # Judge score files
+│       ├── judge_cp1_vs_cp2.json 
+│       ├── judge_cp1_vs_cp2_json.json
 │   └── stage1_training.out   
 │
 └── scripts/
@@ -46,48 +47,146 @@ LLM_Training_Project/
         └── run_stage2.slurm
 ```
 
-Setup & Installation
+=======================================================
 
-Clone the repository and navigate to the directory.
+## REPRODUCTION & SETUP STEPS
 
-Create a virtual environment and install dependencies:
-```bash
-conda create -n llm_env python=3.10
-conda activate llm_env
-pip install -r requirements.txt
+### --- MODELS USED ---
+Student Model: "microsoft/Phi-3.5-mini-instruct"
+
+Teacher/Judge Model: "llama-3.3-70b-instruct-awq" (Via VPN API)
+
+=======================================================
+
+### PHASE 1: LOCAL DATA PREPARATION & IMITATION LEARNING
+
+Set up the local environment and API variables (Windows):
+```
+setx OPENAI_API_KEY "your_api_key_here"
+setx OPENAI_BASE_URL "http://your-vpn-ip:port/v1"
 ```
 
-Set your API keys as environment variables for the synthetic data generation and evaluation judge:
-```bash
-export UTSA_API_KEY="your_key_here"
-export UTSA_BASE_URL="http://10.246.100.230/v1"
+Install local dependencies:
+```
+pip install openai tqdm
 ```
 
-Reproduction Steps
-
-1. Data Construction
-Generate the 100-item synthetic JSON instruct dataset and the 100-item Alpaca evaluation split:
-```bash
-python generate_all_json_tasks.py
-python prepare_eval_data.py
+Process the Alpaca Instruction Dataset:
+```
+python scripts/data_prep/prepare_alpaca_data.py
+-> CREATED: data/processed/alpaca_train.json
+-> CREATED: data/eval/alpaca_eval.json
 ```
 
-2. Stage 1 Training (Alpaca Alignment)
-Submit the training job to the HPC cluster to train the base model on 51k general instructions.
-```bash
-sbatch slurm_scripts/submit_stage1.slurm
+Generate Synthetic JSON Curriculum via Teacher Model:
+```
+python scripts/data_prep/generate_json_data.py
+-> CREATED: data/processed/json_train.json
+-> CREATED: data/eval/json_eval.json
 ```
 
-3. Stage 2 Training (JSON Curriculum)
-Submit the Stage 2 job to continue fine-tuning the Stage 1 adapter exclusively on the synthetic JSON data.
-```bash
-sbatch slurm_scripts/submit_stage2.slurm
+=======================================================
+
+### PHASE 2: ARC CLUSTER ENVIRONMENT SETUP (UTSA HPC)
+
+Connect to the ARC cluster and load Anaconda:
+```
+module load anaconda3
 ```
 
-4. Inference & Evaluation
-Generate responses across all three checkpoints and calculate quantitative metrics:
-```bash
-python run_mass_inference.py
-python calculate_metrics_final.py
-python run_llm_judge.py
+Create and activate a fresh environment:
+```
+conda create --prefix /work/UTSA_ID/llm_assignment3_env python=3.10 -y
+conda activate /work/UTSA_ID/llm_assignment3_env
+```
+
+Install PyTorch (CUDA 12.1) and Hugging Face Ecosystem:
+```
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+pip install transformers datasets accelerate trl bitsandbytes scipy tqdm wandb
+```
+
+Downgrade PEFT to fix float8/bfloat16 compatibility bug:
+```
+pip install peft==0.13.2
+```
+=======================================================
+
+### PHASE 3: MODEL TRAINING ON ARC
+
+(Note: Before running slurm scripts transferred from Windows, always run dos2unix on them)
+```
+dos2unix scripts/slurm/*.slurm
+```
+
+Run Stage 1 (Alpaca QLoRA Tuning):
+```
+sbatch scripts/slurm/run_stage1.slurm
+-> CREATED: models/stage1_adapter/
+```
+
+Run Stage 2 (JSON Curriculum Tuning):
+```
+sbatch scripts/slurm/run_stage2.slurm
+-> CREATED: models/stage2_adapter/
+```
+
+Run Stage 2 Epoch Ablation Study:
+```
+sbatch scripts/slurm/run_stage2_ablation.slurm
+-> CREATED: models/stage2_adapter_1ep/
+-> CREATED: models/stage2_adapter_2ep/
+```
+
+=======================================================
+
+### PHASE 4: MASS INFERENCE ON ARC
+
+Generate responses for Main Checkpoints (CP0, CP1, CP2):
+```
+sbatch scripts/slurm/run_inference.slurm
+-> CREATED: logs/inference_results/cp0_alpaca_results.json
+-> CREATED: logs/inference_results/cp0_json_results.json
+-> CREATED: logs/inference_results/cp1_alpaca_results.json
+-> CREATED: logs/inference_results/cp1_json_results.json
+-> CREATED: logs/inference_results/cp2_alpaca_results.json
+-> CREATED: logs/inference_results/cp2_json_results.json
+```
+
+Generate responses for Ablation Adapters:
+```
+sbatch scripts/slurm/run_ablation_inference.slurm
+-> CREATED: logs/inference_results/cp2_1ep_alpaca_results.json
+-> CREATED: logs/inference_results/cp2_1ep_json_results.json
+-> CREATED: logs/inference_results/cp2_2ep_alpaca_results.json
+-> CREATED: logs/inference_results/cp2_2ep_json_results.json
+```
+
+=======================================================
+
+### PHASE 5: LOCAL EVALUATION & METRICS
+
+(Transfer all JSON files from ARC logs/inference_results/ to local machine)
+
+Install local NLP evaluation metrics:
+```
+pip install rouge-score bert-score
+```
+
+Run LLM-as-a-Judge (Pairwise Evaluation via VPN):
+```
+python scripts/evaluation/run_llm_judge.py
+-> CREATED: logs/judge_cp0_vs_cp1.json
+-> CREATED: logs/judge_cp1_vs_cp2.json
+-> CREATED: logs/judge_cp1_vs_cp2_json.json
+```
+
+Calculate Final Rubric Metrics (ROUGE, BERTScore, JSON Validity):
+```
+python scripts/evaluation/calculate_metrics_final.py
+```
+
+Calculate Ablation Metrics:
+```
+python scripts/evaluation/calculate_ablation_metrics.py
 ```
