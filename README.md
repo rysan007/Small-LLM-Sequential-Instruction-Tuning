@@ -3,6 +3,65 @@ Sequential Fine-Tuning of a Small LLM with a Large LLM and Large LLM Judge Evalu
 
 This repository contains the codebase and data for an NLP experiment demonstrating two-stage Curriculum Learning using QLoRA. We fine-tuned Phi-3.5-mini-instruct to perform strict JSON data extraction while retaining its general conversational abilities.
 
+# 1. Methodology
+## 1.1 Model Selection
+**Student Model:** microsoft/Phi-3.5-mini-instruct
+>(3.8B parameters). This model was selected because it represents a state-of-the-art in the small model. Its compact size makes it highly suitable for single GPU QLoRA fine-tuning on the HPC, while its dense architecture provides a strong enough baseline to meaningfully measure both instruction adherence and structured output formatting.
+>
+**Teacher & Judge Model** Llama-3.3-70B-Instruct
+>(accessed via local VPN API). A large model was required both to generate high quality synthetic training data (imitation learning) and to serve as a judge for qualitative evaluation.
+
+## 1.2 Data Construction & Imitation Learning Pipeline
+The training pipeline used two datasets:
+>**Stage 1 (General Instruction Data):** We used a cleaned variant of the standard Alpaca dataset consisting of roughly 51,500 instruction-input-output pairs. 100 samples were held out strictly for evaluation.
+>
+>**Stage 2 (Structured JSON Instruct Data):** We constructed a synthetic dataset of 1,000 samples using imitation learning (black-box distillation). Prompts were designed across five required task types: JSON extraction, schema-constrained generation, exact-label classification, JSON repair, and tool-call argument generation. These prompts were fed to the Llama 70B teacher model. All teacher outputs were strictly validated for JSON parseability before being paired with their prompts to form the Stage 2 training targets. 100 samples were held out for evaluation.
+
+## 1.3 UTSA HPC Setup & Training Design
+>Training was executed on the UTSA ARC cluster using gpu1a100 (NVIDIA A100 GPU) managed via Slurm.
+>
+>The sequential fine-tuning process was conducted using 4-bit QLoRA (Quantized Low-Rank Adaptation) to maximize memory efficiency. The base model was loaded in nf4 quantization with bfloat16 compute precision.
+>
+>**Stage 1 (Alpaca):** The base Phi-3.5 model was fine-tuned on the Alpaca dataset to establish a strong general instruction capability.
+>
+>**Stage 2 (Teacher JSON):** The adapter weights from Stage 1 were loaded, unfrozen, and continuously fine-tuned on the synthetic JSON dataset.
+
+## Hyperparameters (Consistent across both stages):
+**LoRA Configuration:**
+- Rank (r) = 16, 
+- Alpha (α) = 32, 
+- Dropout = 0.05 
+
+Target modules included all linear layers (q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj).
+
+**Training:** 
+- Learning Rate = 2e-5 with a cosine scheduler 
+- 0.03 warmup ratio
+- Max sequence length was constrained to 1024 tokens
+
+**Epochs:** 
+- Stage 1 trained for 3 epochs.
+- Stage 2 trained for 3 epochs (with an ablation study conducting parallel runs at 1 and 2 epochs)
+
+## 1.4 Evaluation Protocol
+To isolate the effects of sequential training and measure potential catastrophic forgetting, the model was evaluated at three distinct checkpoints:
+- Checkpoint 0 (CP0): The untuned Phi-3.5 base model.
+- Checkpoint 1 (CP1): After Stage 1 Alpaca fine-tuning.
+- Checkpoint 2 (CP2): After Stage 2 JSON fine-tuning.
+
+At each checkpoint, the model generated responses for both the 100 Alpaca and 100 JSON held-out evaluation sets using very low temperature sampling (temperature=0.1).
+
+## Metrics & LLM Judge:
+**General Instruction (Alpaca):** 
+Evaluated using ROUGE (1, 2, L), BERTScore, and a pairwise LLM Judge based on the Self-Instruct methodology. The Llama 70B judge compared CP0 vs. CP1, and CP1 vs. CP2, randomizing response order to prevent positional bias. The judge scored pairs across six criteria: Instruction Following, Correctness, Clarity, Completeness, Structured Output Validity, and Hallucination Risk.
+
+**Structured Output (JSON):** Evaluated using strict metrics, including exact match, JSON parsing validity, Schema Compliance (key matching), and F1 scores (precision/recall of key-value pairs).
+
+
+
+
+
+
 Repository Structure
 
 ```text
