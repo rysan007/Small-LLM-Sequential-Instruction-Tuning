@@ -6,7 +6,7 @@ This repository contains the codebase and data for an NLP experiment demonstrati
 Repository Structure
 
 ```text
-llm_assignment3/
+LLM_Training_Project/
 │
 ├── README.md                 # Blog post & Setup instructions
 ├── requirements.txt          # (peft, trl, transformers, datasets, rouge-score, bert-score, openai)
