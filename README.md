@@ -1,26 +1,49 @@
 # Small-LLM-Sequential-Instruction-Tuning
-Sequential Instruction Tuning of a Small LLM with Strong-Model Judge Evaluation
-
-LLM Sequential Fine-Tuning & Catastrophic Forgetting
+Sequential Fine-Tuning of a Small LLM with a Large LLM and Large LLM Judge Evaluation
 
 This repository contains the codebase and data for an NLP experiment demonstrating two-stage Curriculum Learning using QLoRA. We fine-tuned Phi-3.5-mini-instruct to perform strict JSON data extraction while retaining its general conversational abilities.
 
 Repository Structure
 
 ```text
-├── README.md                   # This file
-├── REPORT.md                   # Full 5-page qualitative analysis and results
-├── requirements.txt            # Python dependencies
-├── config.json                 # Centralized hyperparameters and model configurations
-├── prompts.json                # Editable prompt templates for all stages
-├── generate_all_json_tasks.py  # Synthetic data generation via Imitation Learning
-├── prepare_eval_data.py        # Alpaca dataset cleaning and splitting
-├── train_stage1_alpaca.py      # QLoRA Stage 1 training script
-├── train_stage2_json.py        # QLoRA Stage 2 training script
-├── run_mass_inference.py       # Inference script for model evaluation
-├── run_llm_judge.py            # Pairwise LLM-as-a-Judge evaluation script
-├── calculate_metrics_final.py  # Automated metrics (ROUGE, BERTScore, Field-Level F1)
-└── slurm_scripts/              # UTSA HPC batch scripts for launching jobs
+llm_assignment3/
+│
+├── README.md                 # Blog post & Setup instructions
+├── requirements.txt          # (peft, trl, transformers, datasets, rouge-score, bert-score, openai)
+│
+├── config/
+│   ├── config.json           # Model names, LR, epochs, batch size, max tokens, LoRA params
+│   └── prompts.json          # Editable templates (Teacher, Student, Judge)
+│
+├── data/
+│   ├── processed/            # alpaca_train.json, json_train.json
+│   └── eval/                 # alpaca_eval.json, json_eval.json
+│
+├── logs/
+│   ├── inference_results/    # The six generated CP0/CP1/CP2 .json outputs
+│   ├── judge_cp0_vs_cp1.json # Judge score files
+│   ├── judge_cp1_vs_cp2.json 
+│   ├── judge_cp1_vs_cp2_json.json
+│   └── stage1_training.out   
+│
+└── scripts/
+    ├── data/              
+    │   ├── prepare_alpaca_data.py
+    │   └── generate_json_data.py 
+    │
+    ├── training/
+    │   ├── train_stage1_alpaca.py
+    │   ├── train_stage2_json.py
+    │   └── train_stage2_json_ablation.py
+    │
+    ├── evaluation/
+    │   ├── run_mass_inference.py
+    │   ├── run_llm_judge.py
+    │   └── calculate_metrics_final.py
+    │
+    └── slurm/
+        ├── run_stage1.slurm
+        └── run_stage2.slurm
 ```
 
 Setup & Installation
