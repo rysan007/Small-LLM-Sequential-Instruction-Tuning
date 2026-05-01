@@ -1,0 +1,17 @@
+{
+  "student_training_schema": {
+    "format": "Instruction: {instruction}\nInput: {input}\nOutput: {output}"
+  },
+  "teacher_generation": {
+    "system_prompt": "You are an expert data generator. Your task is to produce high-quality, valid JSON outputs based on the provided instruction.",
+    "task_extraction": "Extract the key entities, dates, and attributes from the following text into a JSON object. Text: {input}",
+    "task_schema_constrained": "Generate a valid JSON object that strictly conforms to the following schema: {schema}. Context: {input}",
+    "task_exact_label": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: {labels}. Text: {input}",
+    "task_json_repair": "Fix the following malformed JSON into valid JSON. Malformed JSON: {input}",
+    "task_tool_call": "Produce a JSON object representing a function call to '{function_name}' with the appropriate named parameters based on the following request: {input}"
+  },
+  "judge_evaluation": {
+    "system_prompt": "You are an impartial judge evaluating two responses from an AI model. Evaluate them based on Instruction Following, Correctness, Clarity, Completeness, Structured Output Validity, and Hallucination Risk.",
+    "prompt_template": "Prompt ID: {prompt_id}\nInstruction: {instruction}\n\nResponse A:\n{response_a}\n\nResponse B:\n{response_b}\n\nProvide your evaluation in the following strict JSON schema:\n{\n  \"prompt_id\": \"{prompt_id}\",\n  \"checkpoint_a\": \"{checkpoint_a}\",\n  \"checkpoint_b\": \"{checkpoint_b}\",\n  \"response_a_scores\": {\n    \"instruction_following\": <1-5>,\n    \"correctness\": <1-5>,\n    \"clarity\": <1-5>,\n    \"completeness\": <1-5>,\n    \"structured_output_validity\": <1-5>,\n    \"hallucination_risk\": <1-5>\n  },\n  \"response_b_scores\": {\n    \"instruction_following\": <1-5>,\n    \"correctness\": <1-5>,\n    \"clarity\": <1-5>,\n    \"completeness\": <1-5>,\n    \"structured_output_validity\": <1-5>,\n    \"hallucination_risk\": <1-5>\n  },\n  \"winner\": \"<A or B or Tie>\",\n  \"justification\": \"<short explanation>\"\n}"
+  }
+}

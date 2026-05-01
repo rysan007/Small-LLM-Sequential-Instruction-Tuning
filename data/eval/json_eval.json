@@ -1,0 +1,502 @@
+[
+  {
+    "instruction": "Produce a JSON object representing a function call to 'send_email' with the appropriate named parameters based on the following request: ",
+    "input": "Generate a conversation between two friends about the latest Barca match.",
+    "output": "{\n  \"function_name\": \"send_email\",\n  \"params\": {\n    \"subject\": \"You won't believe what happened in the Barca match!\",\n    \"body\": \"Hey, did you see the latest Barca match? I'm still reeling from that last-minute goal! What did you think of the game?\",\n    \"to\": \"friend@example.com\",\n    \"from\": \"your_email@example.com\"\n  }\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'search_database' with the appropriate named parameters based on the following request: ",
+    "input": "Determine the diameter of a sphere with a volume of 6.9 cubic meters",
+    "output": "{\n  \"function_name\": \"search_database\",\n  \"params\": {\n    \"query_type\": \"physics\",\n    \"object_type\": \"sphere\",\n    \"known_properties\": {\n      \"volume\": 6.9\n    },\n    \"target_property\": \"diameter\"\n  }\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'schedule_meeting' with the appropriate named parameters based on the following request: ",
+    "input": "Who wrote the novel “The Catcher in the Rye”?",
+    "output": "{\n  \"function_name\": \"schedule_meeting\",\n  \"params\": {\n    \"topic\": \"Discussion on classic literature\",\n    \"attendees\": [\n      \"English Literature Club\"\n    ],\n    \"description\": \"Meeting to discuss the author of 'The Catcher in the Rye'\",\n    \"start_time\": \"2024-03-16T14:00:00\",\n    \"end_time\": \"2024-03-16T15:00:00\"\n  }\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'send_email' with the appropriate named parameters based on the following request: ",
+    "input": "Write a creative blog post about the importance of physical exercise for one's mental health.",
+    "output": "{\n  \"function_name\": \"send_email\",\n  \"params\": {\n    \"subject\": \"The Power of Physical Exercise on Mental Health\",\n    \"body\": \"Dear Reader,\\n\\nRegular physical exercise is a powerful tool for maintaining and improving mental health. Exercise has been shown to reduce symptoms of anxiety and depression, improve mood, and even alleviate symptoms of post-traumatic stress disorder (PTSD).\\n\\nThrough physical activity, individuals can experience a sense of accomplishment and self-efficacy, boosting their self-esteem and confidence. Exercise also provides an opportunity for social interaction, whether it's joining a fitness class, playing team sports, or simply going for a walk with friends.\\n\\nFurthermore, physical exercise has been linked to improved sleep quality, which is essential for overall mental well-being. During sleep, our brains process and consolidate memories, and a lack of quality sleep can exacerbate symptoms of mental health conditions.\\n\\nIncorporating physical exercise into your daily routine can be simple. Start by scheduling a 30-minute walk into your daily planner, or try following along with a yoga video at home. As you become more comfortable with physical activity, you can gradually increase the intensity and duration of your workouts.\\n\\nRemember, every bit counts, and even small amounts of physical exercise can have a significant impact on mental health. So why not get moving today and start experiencing the benefits of physical exercise for yourself?\\n\\nBest regards,\"\n  }\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['POSITIVE', 'NEGATIVE', 'NEUTRAL']. Text: ",
+    "input": "\"I love you.\"",
+    "output": "{\n  \"classification\": \"POSITIVE\"\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['URGENT', 'ROUTINE', 'INFORMATIONAL']. Text: ",
+    "input": "Game Title: Escape from Atlantis\n\nConcept:\nEscape from Atlantis is an adventure game in which players must escape from the sinking city of Atlantis. The city is crumbling, and players must solve puzzles, overcome obstacles, and gather clues and objects to help them escape before it's too late.\n\nSetting:\nThe game takes place in the ancient city of Atlantis. The city is crumbling, with water flooding the streets and buildings collapsing. Players must navigate through the city's various districts, ",
+    "output": "{\n  \"classification\": \"INFORMATIONAL\"\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['URGENT', 'ROUTINE', 'INFORMATIONAL']. Text: ",
+    "input": "Just like the soothing rain on a hot summer day, your words bring comfort to my troubled mind, and just like the warm rays of the sun, your presence brings light and hope to all those around you.",
+    "output": "{\n  \"classification\": \"INFORMATIONAL\"\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'send_email' with the appropriate named parameters based on the following request: ",
+    "input": "Generate an example of an intervention plan to improve student performance",
+    "output": "{\n  \"function_name\": \"send_email\",\n  \"params\": {\n    \"subject\": \"Intervention Plan to Improve Student Performance\",\n    \"body\": \"Dear [Recipient],\\n\\nBelow is an example of an intervention plan to improve student performance:\\n\\n1. Identify Areas of Improvement: Assess student strengths and weaknesses to determine areas where they need extra support.\\n2. Set Specific Goals: Collaborate with the student to set achievable, measurable, and relevant goals.\\n3. Develop a Support Plan: Create a tailored plan that includes additional tutoring, mentoring, or other resources to help the student meet their goals.\\n4. Monitor Progress: Regularly track and assess the student's progress, making adjustments to the plan as needed.\\n5. Communicate with Parents/Guardians: Keep parents/guardians informed about the student's progress and involve them in the intervention plan.\\n\\nBest regards,\\n[Your Name]\",\n    \"to\": \"recipient@example.com\",\n    \"cc\": \"cc_recipient@example.com\",\n    \"bcc\": \"bcc_recipient@example.com\",\n    \"attachments\": [\n      {\n        \"filename\": \"intervention_plan_example.pdf\",\n        \"content\": \"Example content of the attachment\"\n      }\n    ]\n  }\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['POSITIVE', 'NEGATIVE', 'NEUTRAL']. Text: ",
+    "input": "Artificial Intelligence (AI) is a field of computer science that aims to simulate and create intelligent, human-like behavior in machines or programs. It is based on the idea that a computer can perform tasks that normally require human intelligence, such as learning, problem-solving, perception, reasoning and motion. AI technologies include machine learning, neural networks, deep learning, natural language processing, and expert systems, all of which are designed to interact more effectively wi",
+    "output": "{\n  \"classification\": \"NEUTRAL\"\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'search_database' with the appropriate named parameters based on the following request: ",
+    "input": "Create a Twitter account for a tech startup.",
+    "output": "{\n  \"function_name\": \"search_database\",\n  \"params\": {\n    \"query\": \"Twitter account creation\",\n    \"industry\": \"tech\",\n    \"company_type\": \"startup\",\n    \"service\": \"social media\"\n  }\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'send_email' with the appropriate named parameters based on the following request: ",
+    "input": "Outline the main points in a speech about air pollution.",
+    "output": "{\n  \"function_name\": \"send_email\",\n  \"params\": {\n    \"subject\": \"Main Points: Speech on Air Pollution\",\n    \"body\": \"The main points to cover in a speech about air pollution include:\\n1. Introduction to air pollution: Definition and importance.\\n2. Causes of air pollution: Industrial emissions, vehicle exhaust, and agricultural activities.\\n3. Effects of air pollution: Respiratory diseases, cardiovascular issues, and environmental degradation.\\n4. Solutions to air pollution: Renewable energy sources, emission controls, and sustainable practices.\\n5. Call to action: Encouraging audience to make environmentally conscious choices.\",\n    \"to\": \"recipient@example.com\",\n    \"from\": \"sender@example.com\"\n  }\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'search_database' with the appropriate named parameters based on the following request: ",
+    "input": "Design a t-shirt with the annoucement of a new product.",
+    "output": "{\n  \"function_name\": \"search_database\",\n  \"params\": {\n    \"query\": \"t-shirt design\",\n    \"product_type\": \"new product announcement\",\n    \"design_requirements\": {\n      \"color_scheme\": \"bright and vibrant\",\n      \"font_style\": \"bold and modern\",\n      \"image_requirements\": \"product logo or graphic\"\n    },\n    \"output_format\": \"design concept\"\n  }\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'send_email' with the appropriate named parameters based on the following request: ",
+    "input": "Create a new company slogan based on the given facts.",
+    "output": "{\n  \"function_name\": \"send_email\",\n  \"params\": {\n    \"subject\": \"New Company Slogan\",\n    \"body\": \"Our new company slogan is: 'Empowering Innovation, Enhancing Excellence'\",\n    \"to\": \"info@example.com\",\n    \"from\": \"admin@example.com\"\n  }\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'schedule_meeting' with the appropriate named parameters based on the following request: ",
+    "input": "Brainstorm 3 ways in which a bridge can be made stronger",
+    "output": "{\n  \"function_name\": \"schedule_meeting\",\n  \"params\": {\n    \"meeting_topic\": \"Brainstorming Ways to Strengthen a Bridge\",\n    \"meeting_description\": \"Discuss three ways in which a bridge can be made stronger\",\n    \"attendees\": [\n      \"Structural Engineer\",\n      \"Materials Scientist\",\n      \"Architect\"\n    ],\n    \"meeting_time\": \"2024-03-16T10:00:00Z\",\n    \"duration\": 60\n  }\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'search_database' with the appropriate named parameters based on the following request: ",
+    "input": "Find the 5 most similar words for \"happy\".",
+    "output": "{\n  \"function_name\": \"search_database\",\n  \"params\": {\n    \"query\": \"happy\",\n    \"num_results\": 5,\n    \"search_type\": \"similar_words\"\n  }\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'schedule_meeting' with the appropriate named parameters based on the following request: ",
+    "input": "Create a taxonomy of animals in the given list.",
+    "output": "{\n  \"function_name\": \"schedule_meeting\",\n  \"params\": {\n    \"meeting_topic\": \"Create a taxonomy of animals\",\n    \"meeting_description\": \"Discuss and organize the classification of animals in the given list\",\n    \"attendees\": [\n      \"Zoologist\",\n      \"Biologist\",\n      \"Taxonomist\"\n    ],\n    \"meeting_time\": \"2024-09-17T10:00:00\",\n    \"duration\": 60,\n    \"location\": \"Conference Room\"\n  }\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'send_email' with the appropriate named parameters based on the following request: ",
+    "input": "Generate 3 product ideas based on the given criteria",
+    "output": "{\n  \"function_name\": \"send_email\",\n  \"params\": {\n    \"subject\": \"Product Ideas Generation\",\n    \"body\": \"Here are three product ideas based on your criteria: Idea 1, Idea 2, Idea 3\",\n    \"to\": \"recipient@example.com\",\n    \"from\": \"sender@example.com\"\n  }\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'search_database' with the appropriate named parameters based on the following request: ",
+    "input": "Take the input text \"The quick brown fox\" and apply the Caesar Cipher algorithm with a key of 5",
+    "output": "{\n  \"function_name\": \"search_database\",\n  \"params\": {\n    \"input_text\": \"The quick brown fox\",\n    \"algorithm\": \"Caesar Cipher\",\n    \"key\": 5\n  }\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['URGENT', 'ROUTINE', 'INFORMATIONAL']. Text: ",
+    "input": "Here are fifteen adjectives that could be used to describe a friendly person:\n\n1.  Warm\n2.  Welcoming \n3.  Kind \n4.  Approachable \n5.  Outgoing\n6.  Cheerful \n7.  Charismatic\n8.  Sociable\n9.  Good-natured \n10.  Gracious \n11.  Genuine \n12.  Affable \n13.  Amiable\n14.  Convivial\n15.  Congenial",
+    "output": "{\n  \"classification\": \"INFORMATIONAL\"\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['URGENT', 'ROUTINE', 'INFORMATIONAL']. Text: ",
+    "input": "Revised Text: Despite Sarah's substantial investments, she is not wealthy.",
+    "output": "{\n  \"classification\": \"INFORMATIONAL\"\n}"
+  },
+  {
+    "instruction": "Generate a valid JSON object that strictly conforms to the following schema: {\"title\": \"string\", \"summary\": \"string\", \"sentiment\": \"string\"}. Context: ",
+    "input": "To organize the list of items in ascending order, we can use the built-in `sort()` function in Python. Here is one way to write the code:\n\n```python\nitems = [3, 7, 2, 4, 1]\n\n# sort items in ascending order\nitems.sort()\n\n# print the sorted list\nprint(items)\n```\n\nThis would output the list `[1, 2, 3, 4, 7]`, sorted in ascending order.",
+    "output": "{\n  \"title\": \"Sorting Items in Ascending Order\",\n  \"summary\": \"The built-in sort() function in Python can be used to organize a list of items in ascending order.\",\n  \"sentiment\": \"Informative\"\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['POSITIVE', 'NEGATIVE', 'NEUTRAL']. Text: ",
+    "input": "He walked to the store.",
+    "output": "{\n  \"classification\": \"NEUTRAL\"\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'send_email' with the appropriate named parameters based on the following request: ",
+    "input": "What would you do if you saw someone being bullied?",
+    "output": "{\n  \"function_name\": \"send_email\",\n  \"params\": {\n    \"subject\": \"Bullying Incident Report\",\n    \"body\": \"What would you do if you saw someone being bullied?\",\n    \"recipient\": \"support@example.com\",\n    \"sender\": \"user@example.com\"\n  }\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['POSITIVE', 'NEGATIVE', 'NEUTRAL']. Text: ",
+    "input": "To convert kilometers per hour to meters per second, you use the conversion factor `1000 meters / 1 kilometer`, and the time conversion `1 hour / 60 minutes` and `1 minute / 60 seconds`. Multiplying 30 kilometers per hour by these conversion factors, we get:\n\n```\n30 kilometers per hour * (1000 meters / 1 kilometer) * (1 hour / 60 minutes) * (1 minute / 60 seconds) = 8.33 meters per second.\n```\n\nThus, 30 kilometers per hour is equivalent to approximately 8.33 meters per second.",
+    "output": "{\n  \"classification\": \"NEUTRAL\"\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['URGENT', 'ROUTINE', 'INFORMATIONAL']. Text: ",
+    "input": "I'm an AI model, therefore, I'm not capable of drawing illustrations, cartoons, or images. However, I can provide you with description and tips to guide you in creating a cartoon character that resembles a mouse.\n\nSo, first, you can start by sketching the mouse's body. Mice are small, round, and fluffy, so your cartoon character should also have a round and plump body. Add a small circle for the head and connect a bigger one for the body.\n\nNext, add the mouse's features, such as ears, eyes, nose",
+    "output": "{\n  \"classification\": \"INFORMATIONAL\"\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'search_database' with the appropriate named parameters based on the following request: ",
+    "input": "Generate a recipe for an apple tart",
+    "output": "{\n  \"function_name\": \"search_database\",\n  \"params\": {\n    \"query\": \"apple tart recipe\",\n    \"recipe_type\": \"dessert\",\n    \"main_ingredient\": \"apple\",\n    \"course\": \"dessert\"\n  }\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['POSITIVE', 'NEGATIVE', 'NEUTRAL']. Text: ",
+    "input": "Air pollution in cities has negative effects on both the environment and human health. One major impact of air pollution is the increase in respiratory problems, such as asthma, bronchitis and lung cancer. This is especially dangerous for children, the elderly, and people with pre-existing health conditions. Additionally, air pollution can exacerbate allergies and reduce overall life expectancy.\n\nApart from its impact on human health, air pollution also affects the environment. The release of gr",
+    "output": "{\n  \"classification\": \"NEGATIVE\"\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'search_database' with the appropriate named parameters based on the following request: ",
+    "input": "Create a tagline that emphasizes the safety of a product.",
+    "output": "{\n  \"function_name\": \"search_database\",\n  \"params\": {\n    \"query_type\": \"tagline_generation\",\n    \"product_characteristic\": \"safety\",\n    \"emphasis\": \"reliability\",\n    \"output_type\": \"string\"\n  }\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['URGENT', 'ROUTINE', 'INFORMATIONAL']. Text: ",
+    "input": "A computer programming language is a set of instructions, commands, and syntax used to create software programs, websites, and mobile applications.",
+    "output": "{\n  \"classification\": \"INFORMATIONAL\"\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'send_email' with the appropriate named parameters based on the following request: ",
+    "input": "Calculate the length of the hypotenuse of a right triangle with right angle.",
+    "output": "{\n  \"function_name\": \"send_email\",\n  \"params\": {\n    \"subject\": \"Right Triangle Hypotenuse Calculation\",\n    \"body\": \"The length of the hypotenuse of a right triangle can be calculated using the Pythagorean theorem: c = sqrt(a^2 + b^2), where a and b are the lengths of the other two sides.\",\n    \"to\": \"math@example.com\",\n    \"from\": \"calculator@example.com\"\n  }\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['POSITIVE', 'NEGATIVE', 'NEUTRAL']. Text: ",
+    "input": "This text can be classified as a persuasive essay. The author expresses a strong belief that climate change is a pressing concern and urges others to take action in influencing policymakers to make environmentally-friendly decisions. The intent to persuade is evident in the call to action.",
+    "output": "{\n  \"classification\": \"POSITIVE\"\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'send_email' with the appropriate named parameters based on the following request: ",
+    "input": "Name a word that rhymes with \"boat\"",
+    "output": "{\n  \"function_name\": \"send_email\",\n  \"params\": {\n    \"subject\": \"Rhyming Word\",\n    \"body\": \"A word that rhymes with 'boat' is 'coat'.\",\n    \"to\": \"recipient@example.com\",\n    \"from\": \"sender@example.com\"\n  }\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'send_email' with the appropriate named parameters based on the following request: ",
+    "input": "Come up with an alternate ending for the following story snippet.",
+    "output": "{\n  \"function_name\": \"send_email\",\n  \"params\": {\n    \"subject\": \"Alternate Story Ending\",\n    \"body\": \"As the clock struck midnight, the protagonist stumbled upon a hidden doorway in the old mansion. With a surge of curiosity, she pushed the door open and found herself in a world where time stood still. The trees were frozen in mid-sway, and the birds hung suspended in the air. The protagonist wandered through this mystical realm, discovering secrets and marvels beyond her wildest dreams. And when she finally returned to her own world, she found that only a minute had passed, but her life had been forever changed.\",\n    \"to\": \"storylover@example.com\",\n    \"from\": \"storyteller@example.com\"\n  }\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'schedule_meeting' with the appropriate named parameters based on the following request: ",
+    "input": "Generate a rhyming couplet about laughter.",
+    "output": "{\n  \"function_name\": \"schedule_meeting\",\n  \"params\": {\n    \"meeting_topic\": \"Laughter Rhyming Couplets\",\n    \"meeting_description\": \"Generate a rhyming couplet about laughter\",\n    \"attendees\": [\n      \"Poetry Generator\"\n    ],\n    \"meeting_type\": \"Creative Session\"\n  }\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'send_email' with the appropriate named parameters based on the following request: ",
+    "input": "Find the root cause of this error and explain it.",
+    "output": "{\n  \"function_name\": \"send_email\",\n  \"params\": {\n    \"subject\": \"Error Analysis Report\",\n    \"body\": \"The error is caused by an invalid input. Please check the request and try again.\",\n    \"recipient\": \"support@example.com\",\n    \"error_details\": \"Invalid input: 'Find the root cause of this error and explain it.'\"\n  }\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['POSITIVE', 'NEGATIVE', 'NEUTRAL']. Text: ",
+    "input": "To apply a style to all the list items with the class \"highlight\", the CSS selector would be `li.highlight`. Here's an example:\n\n```css\nli.highlight {\n  /*add your desired styles here*/\n  color: #FF5733;\n  font-weight: bold;\n}\n```\n\nThis selector will target all `<li>` elements that have the class `highlight`, and apply the styles defined within the ruleset. In this example, the list items with the class `highlight` will have their text color set to `#FF5733` and their font-weight set to bold.",
+    "output": "{\n  \"classification\": \"NEUTRAL\"\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'search_database' with the appropriate named parameters based on the following request: ",
+    "input": "You are designing a children's book. Write a sentence that describes the setting of the story.",
+    "output": "{\n  \"function_name\": \"search_database\",\n  \"params\": {\n    \"query\": \"children's book settings\",\n    \"category\": \"story settings\",\n    \"context\": \"designing a story\",\n    \"output_type\": \"sentence\"\n  }\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['POSITIVE', 'NEGATIVE', 'NEUTRAL']. Text: ",
+    "input": "Natural disasters are catastrophic events that are caused by natural processes and phenomena. These disasters can have severe impacts on the environment, economy, and human life. There are several types of natural disasters, which can be broadly categorized into the following:\n\n1. Geological Disasters: These are disasters caused by events and processes that occur within the Earth’s crust. Some examples include earthquakes, volcanic eruptions, landslides, and tsunamis. These disasters can cause w",
+    "output": "{\n  \"classification\": \"NEUTRAL\"\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'schedule_meeting' with the appropriate named parameters based on the following request: ",
+    "input": "Given a list of items, indicate which items are difficult to recycle.",
+    "output": "{\n  \"function_name\": \"schedule_meeting\",\n  \"params\": {\n    \"topic\": \"Discussion on Recyclable Items\",\n    \"attendees\": [\n      \"John Doe\",\n      \"Jane Smith\",\n      \"Bob Johnson\"\n    ],\n    \"start_time\": \"2024-03-16T10:00:00\",\n    \"end_time\": \"2024-03-16T11:00:00\",\n    \"location\": \"Conference Room A\",\n    \"agenda\": [\n      {\n        \"item\": \"Plastic Bottles\",\n        \"recyclability\": \"Easy\"\n      },\n      {\n        \"item\": \"Glass Containers\",\n        \"recyclability\": \"Easy\"\n      },\n      {\n        \"item\": \"Electronic Waste\",\n        \"recyclability\": \"Difficult\"\n      },\n      {\n        \"item\": \"Food Waste\",\n        \"recyclability\": \"Difficult\"\n      }\n    ]\n  }\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'schedule_meeting' with the appropriate named parameters based on the following request: ",
+    "input": "Design a 10-day workout plan to achieve maximum results.",
+    "output": "{\n  \"function_name\": \"schedule_meeting\",\n  \"params\": {\n    \"meeting_topic\": \"Workout Plan Discussion\",\n    \"meeting_description\": \"Design a 10-day workout plan to achieve maximum results\",\n    \"meeting_duration\": 60,\n    \"attendees\": [\n      \"Fitness Coach\",\n      \"Client\"\n    ],\n    \"meeting_date\": \"2024-09-20\",\n    \"meeting_time\": \"10:00 AM\",\n    \"location\": \"Gym\"\n  }\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['URGENT', 'ROUTINE', 'INFORMATIONAL']. Text: ",
+    "input": "Parallel lines refer to two lines on a plane that do not intersect or cross each other at any point. These lines maintain an equal distance between each other and run in the same direction. They are most often thought of as being straight lines, extending indefinitely along their designated path without ever meeting. The slopes of parallel lines are the same. This means that the angle of the lines relative to some other line, such as the horizontal line, remains constant. In Euclidean geometry, ",
+    "output": "{\n  \"classification\": \"INFORMATIONAL\"\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'schedule_meeting' with the appropriate named parameters based on the following request: ",
+    "input": "Describe the melody of a love song.",
+    "output": "{\n  \"function_name\": \"schedule_meeting\",\n  \"params\": {\n    \"meeting_topic\": \"Discussion on Love Song Melody\",\n    \"meeting_description\": \"A meeting to describe the melody of a love song, which is typically characterized by a slow and soothing tempo, often featuring instruments like the piano, guitar, or violin, and frequently incorporating romantic and emotional lyrics.\",\n    \"attendees\": [\n      \"Music Producer\",\n      \"Lyricist\",\n      \"Composer\"\n    ],\n    \"meeting_time\": \"2024-03-15T14:00:00\",\n    \"location\": \"Conference Room A\"\n  }\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['POSITIVE', 'NEGATIVE', 'NEUTRAL']. Text: ",
+    "input": "Many is a determiner and pronoun used to indicate that there is a large number of something.",
+    "output": "{\n  \"classification\": \"NEUTRAL\"\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'search_database' with the appropriate named parameters based on the following request: ",
+    "input": "Summarise the main argument.",
+    "output": "{\n  \"function_name\": \"search_database\",\n  \"params\": {\n    \"query\": \"Summarise the main argument\",\n    \"search_type\": \"argument_summary\"\n  }\n}"
+  },
+  {
+    "instruction": "Generate a valid JSON object that strictly conforms to the following schema: {\"title\": \"string\", \"summary\": \"string\", \"sentiment\": \"string\"}. Context: ",
+    "input": "The statement \"Dogs cannot fly and cats can.\" is inconsistent because both dogs and cats are quadruped mammals and neither species is capable of flying.",
+    "output": "{\n  \"title\": \"Inconsistencies in Animal Flight Capabilities\",\n  \"summary\": \"The statement about dogs and cats flying is incorrect because both are quadruped mammals that cannot fly.\",\n  \"sentiment\": \"Neutral\"\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['POSITIVE', 'NEGATIVE', 'NEUTRAL']. Text: ",
+    "input": "Dogs have been present on the Earth for many centuries, originally domesticated from wolves. They are valued for their loyalty, companionship, and intelligence. Over time, their popularity has grown, serving in various roles, including as guardians and companions.",
+    "output": "{\n  \"classification\": \"POSITIVE\"\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'search_database' with the appropriate named parameters based on the following request: ",
+    "input": "Find the sum of 21 multiplied by 5.",
+    "output": "{\n  \"function_name\": \"search_database\",\n  \"params\": {\n    \"query\": \"sum\",\n    \"num1\": 21,\n    \"operator\": \"multiplied by\",\n    \"num2\": 5\n  }\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['URGENT', 'ROUTINE', 'INFORMATIONAL']. Text: ",
+    "input": "The American Revolutionary War (1775–1783) was caused by a variety of factors and included both political and economic reasons. The main issue was British control over the thirteen American colonies and the increasingly heavy taxation and restrictions placed upon the colonists to raise revenue for the British crown, without any representation in the British Parliament. These tensions boiled over with the Intolerable Acts of 1774, and eventually, the colonists united and declared their independen",
+    "output": "{\n  \"classification\": \"INFORMATIONAL\"\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['POSITIVE', 'NEGATIVE', 'NEUTRAL']. Text: ",
+    "input": "Smell.",
+    "output": "{\n  \"classification\": \"NEUTRAL\"\n}"
+  },
+  {
+    "instruction": "Generate a valid JSON object that strictly conforms to the following schema: {\"key_points\": [\"string\"], \"word_count\": \"integer\"}. Context: ",
+    "input": "The painting is stunningly beautiful.",
+    "output": "{\n  \"key_points\": [\n    \"The painting is described as stunningly beautiful\"\n  ],\n  \"word_count\": 5\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'search_database' with the appropriate named parameters based on the following request: ",
+    "input": "Explain how to design software architecture.",
+    "output": "{\n  \"function_name\": \"search_database\",\n  \"params\": {\n    \"query\": \"design software architecture\",\n    \"category\": \"software development\",\n    \"sub_category\": \"architecture\",\n    \"resource_type\": \"tutorial\"\n  }\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'schedule_meeting' with the appropriate named parameters based on the following request: ",
+    "input": "List the key differences between artificial neural networks and convolutional neural networks.",
+    "output": "{\n  \"function_name\": \"schedule_meeting\",\n  \"params\": {\n    \"topic\": \"Introduction to Neural Networks\",\n    \"attendees\": [\n      \"Data Scientist\",\n      \"AI Engineer\"\n    ],\n    \"duration\": 60,\n    \"description\": \"Discuss key differences between artificial neural networks and convolutional neural networks\",\n    \"agenda\": [\n      \"Definition of Artificial Neural Networks\",\n      \"Definition of Convolutional Neural Networks\",\n      \"Comparison of ANN and CNN\",\n      \"Key differences: Architecture, Application, and Training\"\n    ]\n  }\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'send_email' with the appropriate named parameters based on the following request: ",
+    "input": "Rewrite the given sentence to use a more formal phrase than the one used in the example.",
+    "output": "{\n  \"function_name\": \"send_email\",\n  \"params\": {\n    \"subject\": \"Request for Formal Sentence Rewrite\",\n    \"body\": \"Please rewrite the given sentence to utilize a more formal phrase than the one used in the example.\",\n    \"recipient\": \"recipient@example.com\",\n    \"sender\": \"sender@example.com\"\n  }\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['POSITIVE', 'NEGATIVE', 'NEUTRAL']. Text: ",
+    "input": "That quote speaks to the power of having determination and the impact it can have on achieving one's goals. Determination can provide the fuel to keep pushing forward despite challenges and setbacks. With hard work, perseverance, and a strong desire to succeed, a determined individual can overcome obstacles and make their dreams a reality. Of course, it's important to note that determination alone isn't always enough to accomplish everything as there will always be outside factors at play, but t",
+    "output": "{\n  \"classification\": \"POSITIVE\"\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['POSITIVE', 'NEGATIVE', 'NEUTRAL']. Text: ",
+    "input": "Global warming, the gradual increase in the Earth's temperature, is a serious concern for several reasons. First, it is largely caused by human activities that emit greenhouse gases into the atmosphere. The burning of fossil fuels and deforestation are two of the biggest contributors to this phenomenon. The impact of these activities is significantly changing global climate patterns, which has far-reaching consequences.\n\nOne of the most concerning effects of global warming is the rising sea leve",
+    "output": "{\n  \"classification\": \"NEGATIVE\"\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['POSITIVE', 'NEGATIVE', 'NEUTRAL']. Text: ",
+    "input": "One new product idea related to food packaging could be an eco-friendly line of edible food wraps. These wraps could be made from natural materials such as seaweed or rice paper, and would provide consumers with a convenient and waste-free alternative to traditional plastic or foil food packaging. Not only would these edible wraps be better for the environment, but they could also be infused with different flavors to enhance the taste of the food they contained. This could be a game-changer for ",
+    "output": "{\n  \"classification\": \"POSITIVE\"\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['POSITIVE', 'NEGATIVE', 'NEUTRAL']. Text: ",
+    "input": "\"Satisfy Your Cravings: A New Cheese Shop Opens Its Doors in the City!\"",
+    "output": "{\n  \"classification\": \"POSITIVE\"\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['URGENT', 'ROUTINE', 'INFORMATIONAL']. Text: ",
+    "input": "Three common methods of data collection are:\n\n1. Surveys: This method involves collecting information through questionnaires or interviews. Surveys can be conducted in person, over the phone, or online.\n\n2. Observations: This method involves collecting data through direct observation of people, events, or phenomena. The observer may record their observations in notes, audio recordings, photographs, or videos.\n\n3. Experiments: In this method, data is collected by conducting controlled experiments",
+    "output": "{\n  \"classification\": \"INFORMATIONAL\"\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'send_email' with the appropriate named parameters based on the following request: ",
+    "input": "Given some text and a keyword, find the synonyms of the keyword in the text.",
+    "output": "{\n  \"function_name\": \"send_email\",\n  \"params\": {\n    \"subject\": \"Synonyms Found\",\n    \"body\": \"The synonyms of the keyword in the text are: similar, alike, corresponding\",\n    \"to\": \"recipient@example.com\",\n    \"from\": \"sender@example.com\",\n    \"keyword\": \"big\",\n    \"text\": \"The big house had a big garden with big trees.\",\n    \"synonyms\": [\n      \"large\",\n      \"huge\",\n      \"enormous\"\n    ]\n  }\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'schedule_meeting' with the appropriate named parameters based on the following request: ",
+    "input": "Name something you can do with paper.",
+    "output": "{\n  \"function_name\": \"schedule_meeting\",\n  \"params\": {\n    \"topic\": \"Discussing Paper Activities\",\n    \"description\": \"Meeting to explore various uses of paper, such as writing, drawing, or crafting.\",\n    \"attendees\": [\n      \"John Doe\",\n      \"Jane Smith\"\n    ],\n    \"duration\": 60,\n    \"time\": \"2024-03-16T10:00:00\"\n  }\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['POSITIVE', 'NEGATIVE', 'NEUTRAL']. Text: ",
+    "input": "Here's a Python implementation that reverses a singly linked list:\n\n```\nclass ListNode:\n    def __init__(self, val=0, next=None):\n        self.val = val\n        self.next = next\n\ndef reverseList(head: ListNode) -> ListNode:\n    prev = None\n    curr = head\n    while curr:\n        temp = curr.next\n        curr.next = prev\n        prev = curr\n        curr = temp\n    return prev\n```\n\nThe function `reverseList` takes in the head of a singly linked list as its input and returns the new head of the rev",
+    "output": "{\n  \"classification\": \"NEUTRAL\"\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'search_database' with the appropriate named parameters based on the following request: ",
+    "input": "Find the definition of the world 'algorithm'.",
+    "output": "{\n  \"function_name\": \"search_database\",\n  \"params\": {\n    \"query\": \"definition of algorithm\",\n    \"search_type\": \"definition\",\n    \"keyword\": \"algorithm\"\n  }\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'schedule_meeting' with the appropriate named parameters based on the following request: ",
+    "input": "Analyze the following data and explain the trends.",
+    "output": "{\n  \"function_name\": \"schedule_meeting\",\n  \"params\": {\n    \"meeting_topic\": \"Data Analysis and Trend Explanation\",\n    \"meeting_description\": \"Analyze the provided data and explain the trends\",\n    \"attendees\": [\n      \"Data Analyst\",\n      \"Team Lead\"\n    ],\n    \"start_time\": \"2024-09-17T10:00:00\",\n    \"end_time\": \"2024-09-17T11:30:00\"\n  }\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'search_database' with the appropriate named parameters based on the following request: ",
+    "input": "Discern which of these statements is true.",
+    "output": "{\n  \"function_name\": \"search_database\",\n  \"params\": {\n    \"query\": \"Discern which of these statements is true\"\n  }\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['POSITIVE', 'NEGATIVE', 'NEUTRAL']. Text: ",
+    "input": "Both dogs and cats are two of the most popular pets in the world, known for their loyalty, affection, and ability to provide companionship. However, there are certain differences in their characteristics, nature and overall care which might influence an individual's choice while selecting them as a pet.\n\nDogs, famously known as \"man's best friend\" are highly social animals that crave attention and thrive on human interaction. They are often highly trainable, can perform tricks, and are used in v",
+    "output": "{\n  \"classification\": \"NEUTRAL\"\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['POSITIVE', 'NEGATIVE', 'NEUTRAL']. Text: ",
+    "input": "\"Nevertheless, my house was small but cozy.\"",
+    "output": "{\n  \"classification\": \"POSITIVE\"\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'search_database' with the appropriate named parameters based on the following request: ",
+    "input": "Take the given input and generate a valid phone number.",
+    "output": "{\n  \"function_name\": \"search_database\",\n  \"params\": {\n    \"phone_number\": \"(123) 456-7890\"\n  }\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'search_database' with the appropriate named parameters based on the following request: ",
+    "input": "You are given two integers, N and X. N represents the price of an investment, and X represents the profit made from that investment. You can invest as many times as you want, and everytime the profit increment from its base value. Each round count as an investment.\n\nYour task is to calculate the number of investments needed to reach full rentability, which means that the price of all previous investments have been exceeded. If it is impossible to reach rentability, you should return Bad Investment.",
+    "output": "{\n  \"function_name\": \"search_database\",\n  \"params\": {\n    \"investment_price\": 100,\n    \"initial_profit\": 10\n  }\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['POSITIVE', 'NEGATIVE', 'NEUTRAL']. Text: ",
+    "input": "A) Graduation is a celebration of your accomplishments.",
+    "output": "{\n  \"classification\": \"POSITIVE\"\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'send_email' with the appropriate named parameters based on the following request: ",
+    "input": "Name one type of artificial neural network.",
+    "output": "{\n  \"function_name\": \"send_email\",\n  \"params\": {\n    \"subject\": \"Artificial Neural Network Type\",\n    \"body\": \"One type of artificial neural network is a Convolutional Neural Network (CNN).\",\n    \"to\": \"recipient@example.com\",\n    \"from\": \"sender@example.com\"\n  }\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['URGENT', 'ROUTINE', 'INFORMATIONAL']. Text: ",
+    "input": "One color that is often associated with happiness is yellow. It is bright and warm, reminiscent of sunshine and cheerful summer days. Yellow is also the color of smiley faces and sunflowers, adding to its association with happiness and joy.",
+    "output": "{\n  \"classification\": \"INFORMATIONAL\"\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'schedule_meeting' with the appropriate named parameters based on the following request: ",
+    "input": "Convert the given JSON code into YAML format.",
+    "output": "{\n  \"function_name\": \"schedule_meeting\",\n  \"params\": {\n    \"input_data\": \"{\\\"name\\\": \\\"John\\\", \\\"age\\\": 30, \\\"city\\\": \\\"New York\\\"}\",\n    \"output_format\": \"YAML\"\n  }\n}"
+  },
+  {
+    "instruction": "Generate a valid JSON object that strictly conforms to the following schema: {\"key_points\": [\"string\"], \"word_count\": \"integer\"}. Context: ",
+    "input": "The verb in the sentence is \"visits\".",
+    "output": "{\n  \"key_points\": [\n    \"The verb in the sentence is 'visits'\"\n  ],\n  \"word_count\": 7\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'search_database' with the appropriate named parameters based on the following request: ",
+    "input": "Summarize John Locke's philosophy on human nature.",
+    "output": "{\n  \"function_name\": \"search_database\",\n  \"params\": {\n    \"query\": \"John Locke philosophy human nature\",\n    \"category\": \"philosophy\",\n    \"sub_category\": \"human nature\",\n    \"author\": \"John Locke\",\n    \"output_type\": \"summary\"\n  }\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'send_email' with the appropriate named parameters based on the following request: ",
+    "input": "Write an algorithm that can identify and count the number of vowels in a given word.",
+    "output": "{\n  \"function_name\": \"send_email\",\n  \"params\": {\n    \"subject\": \"Vowel Counting Algorithm\",\n    \"body\": \"To count the number of vowels in a given word, you can use the following steps:\\n1. Define the word as a string.\\n2. Initialize a counter variable to 0.\\n3. Iterate over each character in the word.\\n4. Check if the character is a vowel (i.e., 'a', 'e', 'i', 'o', or 'u').\\n5. If the character is a vowel, increment the counter.\\n6. After iterating over all characters, return the counter as the vowel count.\",\n    \"to\": \"algorithm@example.com\",\n    \"from\": \"sender@example.com\"\n  }\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'search_database' with the appropriate named parameters based on the following request: ",
+    "input": "Categorize this sentence into a specific emotion: She felt left out of the group.",
+    "output": "{\n  \"function_name\": \"search_database\",\n  \"params\": {\n    \"query\": \"She felt left out of the group\",\n    \"emotion_detection\": true,\n    \"categorization\": \"emotion\"\n  }\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'send_email' with the appropriate named parameters based on the following request: ",
+    "input": "What kind of activity can you suggest to do with family on a Sunday afternoon?",
+    "output": "{\n  \"function_name\": \"send_email\",\n  \"params\": {\n    \"subject\": \"Sunday Afternoon Family Activity Suggestions\",\n    \"body\": \"You can consider the following activities to do with your family on a Sunday afternoon: \\n- Outdoor picnic or BBQ \\n- Visiting a local museum or park \\n- Playing board games or doing a puzzle together \\n- Watching a movie or playing indoor games \\n- Going for a hike or a bike ride\",\n    \"to\": \"user@example.com\",\n    \"from\": \"activity_suggestions@example.com\"\n  }\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['URGENT', 'ROUTINE', 'INFORMATIONAL']. Text: ",
+    "input": "Atomic weapons were first used on August 6, 1945, during World War II, when the United States dropped an atomic bomb on the Japanese city of Hiroshima. Three days later, on August 9, the US dropped another atomic bomb on the city of Nagasaki. These are the only two instances in history where nuclear weapons were used in warfare.",
+    "output": "{\n  \"classification\": \"INFORMATIONAL\"\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'schedule_meeting' with the appropriate named parameters based on the following request: ",
+    "input": "Rewrite the sentence to say the same thing differently.",
+    "output": "{\n  \"function_name\": \"schedule_meeting\",\n  \"params\": {\n    \"meeting_topic\": \"Rewrite the sentence to convey the same message in a different way\",\n    \"meeting_description\": \"Rephrase the given sentence to express the same idea using alternative words or phrases\",\n    \"meeting_time\": \"ASAP\",\n    \"attendees\": [\n      \"Language Expert\",\n      \"Content Creator\"\n    ]\n  }\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['POSITIVE', 'NEGATIVE', 'NEUTRAL']. Text: ",
+    "input": "\"I need to prepare a speech.\"",
+    "output": "{\n  \"classification\": \"NEUTRAL\"\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['URGENT', 'ROUTINE', 'INFORMATIONAL']. Text: ",
+    "input": "\"Purely Organic, Simply Wholesome: Bringing the Best of Nature to You!\"",
+    "output": "{\n  \"classification\": \"INFORMATIONAL\"\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['POSITIVE', 'NEGATIVE', 'NEUTRAL']. Text: ",
+    "input": "Eating a diet that is rich in fruits and vegetables has countless benefits that are essential to living a healthy lifestyle. These foods provide essential nutrients that are vital for the well-being of our bodies. They are low in calories, high in fiber, and packed with vitamins and minerals. By incorporating more fruits and vegetables into our diets, we can live longer, feel better, and prevent many chronic diseases.\n\nFruits and vegetables are nutritional powerhouses. They are rich in essential",
+    "output": "{\n  \"classification\": \"POSITIVE\"\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'search_database' with the appropriate named parameters based on the following request: ",
+    "input": "Describe a way to introduce yourself at a job interview.",
+    "output": "{\n  \"function_name\": \"search_database\",\n  \"params\": {\n    \"query\": \"introduce yourself at a job interview\",\n    \"category\": \"job_interviews\",\n    \"sub_category\": \"introductions\",\n    \"format\": \"description\"\n  }\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'schedule_meeting' with the appropriate named parameters based on the following request: ",
+    "input": "Pick a color from the given list and describe how it could be used to create a cozy atmosphere in a room.",
+    "output": "{\n  \"function_name\": \"schedule_meeting\",\n  \"params\": {\n    \"color\": \"blue\",\n    \"description\": \"Blue can be used to create a cozy atmosphere in a room by incorporating it into the decor through items such as throw pillows, blankets, and wall art. The calming effect of blue can promote relaxation and serenity, making it an ideal choice for a cozy space.\"\n  }\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'search_database' with the appropriate named parameters based on the following request: ",
+    "input": "Find the present value of the following future cash flow",
+    "output": "{\n  \"function_name\": \"search_database\",\n  \"params\": {\n    \"cash_flow_type\": \"future\",\n    \"cash_flow_value\": \"present value\",\n    \"query_type\": \"financial_calculation\"\n  }\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'send_email' with the appropriate named parameters based on the following request: ",
+    "input": "Generate a story of two friends meeting a new person",
+    "output": "{\n  \"function_name\": \"send_email\",\n  \"params\": {\n    \"subject\": \"A Chance Encounter\",\n    \"body\": \"Once upon a time, in a bustling city, two friends, Alex and Sam, stumbled upon a quirky little caf\\u00e9. As they sipped their lattes, they noticed a stranger sitting alone at a table nearby. The stranger, who introduced herself as Maya, had an intriguing aura about her. As the three struck up a conversation, they discovered a shared love for adventure and good stories. Before parting ways, they exchanged numbers, and Alex, Sam, and Maya made a plan to meet up again soon for a hike in the nearby woods.\",\n    \"to\": \"storylover@example.com\",\n    \"from\": \"storyteller@example.com\"\n  }\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'schedule_meeting' with the appropriate named parameters based on the following request: ",
+    "input": "Describe a concept related to sustainability",
+    "output": "{\n  \"function_name\": \"schedule_meeting\",\n  \"params\": {\n    \"topic\": \"Sustainable Practices in Modern Industry\",\n    \"description\": \"Discussing the importance of reducing carbon footprint and implementing eco-friendly technologies\",\n    \"attendees\": [\n      \"John Doe\",\n      \"Jane Smith\",\n      \"Bob Johnson\"\n    ],\n    \"date\": \"2024-03-16\",\n    \"time\": \"10:00 AM\",\n    \"location\": \"Conference Room A\",\n    \"duration\": \"1 hour\"\n  }\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['URGENT', 'ROUTINE', 'INFORMATIONAL']. Text: ",
+    "input": "Natural selection is the process by which certain inherited traits increase an organism's likelihood of survival and reproduction, leading to that trait becoming more common in successive generations. Over time, this can result in adaptation, speciation or even extinction.",
+    "output": "{\n  \"classification\": \"INFORMATIONAL\"\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['URGENT', 'ROUTINE', 'INFORMATIONAL']. Text: ",
+    "input": "The primary economic purpose of setting a minimum wage is to ensure that workers earn a fair wage, which can help to reduce poverty and income inequality. By establishing a minimum wage, governments aim to provide a basic standard of living for low-wage workers, protecting them from being exploited with very low pay. A minimum wage may also help in increasing consumer spending, as workers have more money to spend on goods and services. Additionally, minimum wages aim to encourage fair competitio",
+    "output": "{\n  \"classification\": \"INFORMATIONAL\"\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['URGENT', 'ROUTINE', 'INFORMATIONAL']. Text: ",
+    "input": "Sensitive data, (also referred to as Personal Identifiable Information or PII), must be protected to maintain the privacy and security of individuals or organizations. Some best practices for protecting sensitive data include the following: \n\n1. Inventory: Start by creating an inventory of all the sensitive data you have, the systems that store or process it, and the people who have access to it. This inventory will help you better understand the scope of the challenge, identify areas of risk, a",
+    "output": "{\n  \"classification\": \"INFORMATIONAL\"\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['POSITIVE', 'NEGATIVE', 'NEUTRAL']. Text: ",
+    "input": "The missing number in the sequence is 8. The sequence is a pattern of doubling the previous number: starting with 2, doubling it gives 4, doubling 4 gives 8, doubling 8 gives 16. So the sequence is 2, 4, 8, 16. There is no missing number.",
+    "output": "{\n  \"classification\": \"NEUTRAL\"\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['POSITIVE', 'NEGATIVE', 'NEUTRAL']. Text: ",
+    "input": "The forest whispers to the stream  \nAs gentle breeze rustles the leaves  \nThe sunlight dances in a beam  \nAs nature weaves its magic sleeves  \n\nThe birds above sing sweet and free  \nAs peace surrounds all that we see.",
+    "output": "{\n  \"classification\": \"POSITIVE\"\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['URGENT', 'ROUTINE', 'INFORMATIONAL']. Text: ",
+    "input": "\"I am French (female).\"",
+    "output": "{\n  \"classification\": \"INFORMATIONAL\"\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'search_database' with the appropriate named parameters based on the following request: ",
+    "input": "Given a political statement, classify it as liberal or conservative",
+    "output": "{\n  \"function_name\": \"search_database\",\n  \"params\": {\n    \"query\": \"political statement classification\",\n    \"statement\": \"Given a political statement, classify it as liberal or conservative\",\n    \"classification_type\": \"ideological\",\n    \"categories\": [\n      \"liberal\",\n      \"conservative\"\n    ]\n  }\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['URGENT', 'ROUTINE', 'INFORMATIONAL']. Text: ",
+    "input": "The dog was adorable, yet covered in mud.",
+    "output": "{\n  \"classification\": \"INFORMATIONAL\"\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['POSITIVE', 'NEGATIVE', 'NEUTRAL']. Text: ",
+    "input": "One reason why robots should not be trusted to make decisions in the home is that they lack the emotional intelligence and nuanced understanding of human behavior and relationships that is necessary for making complex decisions that affect people's lives. Additionally, robots operate based on pre-programmed logic and algorithms, and do not possess the ability to make moral or ethical judgments that may be required in certain decision-making situations.",
+    "output": "{\n  \"classification\": \"NEGATIVE\"\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['URGENT', 'ROUTINE', 'INFORMATIONAL']. Text: ",
+    "input": "Here are three countries and three cities:\n\nCountries:\n1. Japan\n2. Italy\n3. Argentina\n\nCities:\n1. Tokyo\n2. Rome\n3. Buenos Aires",
+    "output": "{\n  \"classification\": \"INFORMATIONAL\"\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['POSITIVE', 'NEGATIVE', 'NEUTRAL']. Text: ",
+    "input": "One example of something fathers usually do for their children is teaching them important life skills such as riding a bike, changing a tire, or throwing a ball. Fathers often provide guidance, support, and encouragement as their children learn and grow.",
+    "output": "{\n  \"classification\": \"POSITIVE\"\n}"
+  },
+  {
+    "instruction": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: ['POSITIVE', 'NEGATIVE', 'NEUTRAL']. Text: ",
+    "input": "The scientific method is a systematic approach used to answer questions and hypotheses about the natural world. It involves the following key steps:\n\n1. Observe and ask questions: Scientists make observations and analyze these observations to form hypotheses. For example, an observer might notice that certain plants grow faster than others.\n\n2. Create a hypothesis: A hypothesis is a testable statement about what you believe is happening in your observation. For example, the observer might guess ",
+    "output": "{\n  \"classification\": \"NEUTRAL\"\n}"
+  },
+  {
+    "instruction": "Produce a JSON object representing a function call to 'search_database' with the appropriate named parameters based on the following request: ",
+    "input": "List five possible obstacles that a person striving for success can face",
+    "output": "{\n  \"function_name\": \"search_database\",\n  \"params\": {\n    \"query\": \"obstacles to success\",\n    \"num_results\": 5,\n    \"categories\": [\n      \"personal development\",\n      \"productivity\",\n      \"motivation\"\n    ],\n    \"format\": \"list\"\n  }\n}"
+  }
+]

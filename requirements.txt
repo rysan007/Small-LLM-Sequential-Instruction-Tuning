@@ -1,0 +1,15 @@
+torch
+torchvision
+torchaudio
+transformers
+datasets
+peft==0.13.2
+trl
+bitsandbytes
+accelerate
+openai>=1.0.0
+rouge-score
+bert-score
+tqdm
+scipy
+wandb

@@ -1,0 +1,29 @@
+{
+  "models": {
+    "student_model": "microsoft/Phi-3.5-mini-instruct",
+    "teacher_model": "llama-3.3-70b-instruct-awq",
+    "judge_model": "llama-3.3-70b-instruct-awq"
+  },
+  "training": {
+    "fine_tuning_method": "QLoRA",
+    "precision": "4-bit",
+    "learning_rate": 2e-5,
+    "max_sequence_length": 2048,
+    "batch_size": 4,
+    "stage_1_epochs": 3,
+    "stage_2_epochs": 3
+  },
+  "lora": {
+    "rank": 16,
+    "alpha": 32,
+    "dropout": 0.05
+  },
+  "evaluation": {
+    "alpaca_eval_prompts_count": 100,
+    "json_eval_prompts_count": 100
+  },
+  "data_generation": {
+    "target_train_samples": 1000,
+    "target_eval_samples": 100
+  }
+}
