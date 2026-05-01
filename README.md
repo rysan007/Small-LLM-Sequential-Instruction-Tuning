@@ -22,10 +22,10 @@ LLM_Training_Project/
 ├── logs/
 │   ├── inference_results/    # The six generated CP0/CP1/CP2 .json outputs
 │   ├── judge_results/    
-│       ├── judge_cp0_vs_cp1.json # Judge score files
-│       ├── judge_cp1_vs_cp2.json 
-│       ├── judge_cp1_vs_cp2_json.json
-│   └── stage1_training.out   
+│   │   ├── judge_cp0_vs_cp1.json # Judge score files
+│   │   ├── judge_cp1_vs_cp2.json 
+│   │   ├── judge_cp1_vs_cp2_json.json
+│   └── run_logs # Log outputs from scripts 
 │
 └── scripts/
     ├── data/              
@@ -40,11 +40,16 @@ LLM_Training_Project/
     ├── evaluation/
     │   ├── run_mass_inference.py
     │   ├── run_llm_judge.py
+    │   ├── calculate_ablation_metrics.py
+    │   ├── run_ablation_inference.py
     │   └── calculate_metrics_final.py
     │
     └── slurm/
         ├── run_stage1.slurm
-        └── run_stage2.slurm
+        ├── run_stage2.slurm
+        ├── run_ablation_inference.slurm
+        ├── run_inference.slurm
+        └── run_stage2_ablation.slurm
 ```
 
 =======================================================
@@ -52,9 +57,10 @@ LLM_Training_Project/
 ## REPRODUCTION & SETUP STEPS
 
 ### --- MODELS USED ---
+```
 Student Model: "microsoft/Phi-3.5-mini-instruct"
-
 Teacher/Judge Model: "llama-3.3-70b-instruct-awq" (Via VPN API)
+```
 
 =======================================================
 
