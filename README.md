@@ -57,12 +57,176 @@ Evaluated using ROUGE (1, 2, L), BERTScore, and a pairwise LLM Judge based on th
 
 **Structured Output (JSON):** Evaluated using strict metrics, including exact match, JSON parsing validity, Schema Compliance (key matching), and F1 scores (precision/recall of key-value pairs).
 
+# 2. Experiments
+
+### 4.1 & 4.2 Alpaca / General Tasks Comparison
+| Checkpoint | Alpaca Judge Win Rate | R-1 | R-2 | ROUGE-L | BERTScore | Avg Length |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| CP0: Base | N/A (Baseline) | 28.2 | 10.8 | 17.0 | 85.0 | 450 words |
+| CP1: Stage 1 | 26.3% vs CP0 | 27.8 | 11.3 | 17.4 | 85.2 | 487 words |
+| CP2: Stage 2 | 47.5% vs CP1 | 27.6 | 11.1 | 17.0 | 84.9 | 479 words |
+
+- Fine-tuning on Alpaca (Stage 1) left to a slight rise in ROUGE-L (17.0 → 17.4) and a consistent BERTScore (85.2).
+- Average word count increased from 450 to 487 words, showing the model learned to give more detailed answers.
+- CP1 only won 26.3% of the time against the Base model.  It's possible that the there is a verbosity bias with the large judge model.  
+
+### 4.3 JSON Structured Output Evaluation
+| Checkpoint | JSON Judge Win Rate | JSON Validity | Schema Compliance | Exact Match | Field-Level F1 |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| CP0: Base | N/A (Baseline) | 2.0% | 100.0% | 0.0% | 0.0% |
+| CP1: Stage 1 | N/A | 1.0% | 100.0% | 0.0% | 0.0% |
+| CP2: Stage 2 | 28.2% vs CP1 | 2.0% | 100.0% | 0.0% | 0.0% |
+
+- Strict programmatic metrics (Exact Match, Field-Level F1) remained at 0%, and JSON validity barely moved (staying around 2.0%).
+- It's likely that the model still tried to act like a chatbot, not adhering to the strict JSON format that was expected.  This can break the Python json.loads() parser.
+- However, of the 2.0% of outputs that did parse correctly, Schema Compliance was 100%.
+
+### 4.4 Forgetting Analysis
+- Comparing Alpaca CP1 and CP2, the model's performance on general tasks did not have much difference.
+- ROUGE-L only changed by .4 points (17.4 to 17.0).
+- BERTScore only dropped by .3 points (85.2 to 84.9).  The semantic quality of the text was mostly preserved.
+- The Llama 70B judge actually preferred CP2 over CP1 47.5% of the time, showing that it retained assistant qualities.
+- Based on purely qualitative metrics, catastrophic forgetting did not occur.
+
+### 4.5 Ablation Study: Stage 2 Training Epochs
+| Stage 2 Epochs | JSON Validity (Capability Gained) | Alpaca ROUGE-L (Capability Retained) |
+| :--- | :--- | :--- |
+| 1 Epoch | 1.0% | 15.2 |
+| 2 Epochs | 2.0% | 15.0 |
+| 3 Epochs (Main) | 2.0% | 17.0 |
+
+- We tested 1, 2, and 3 epochs during Stage 2 to see how training duration affected capability gained (JSON) vs. capability retained (Alpaca ROUGE-L).
+- Scaling the epochs didn't really help the JSON validity, which stayed around 1-2 percent.  It didn't fix the chattiness.
+- There was a small drop in ROUGE-L at 1 and 2 epochs (down to 15.0 by .2).  Stopping too early appeared to weaken the model.  However, 3 epochs allowed for some stabalization back up to 17.
+
+### 4.6 Figures
+
+# Stage 1 Loss
+
+<img width="2400" height="1500" alt="stage1_loss" src="https://github.com/user-attachments/assets/09b7af43-b1e3-45a9-8c2a-4f6755fe69ea" />
+
+# Stage 2 Loss
+
+<img width="2400" height="1500" alt="stage2_loss" src="https://github.com/user-attachments/assets/4980c9c8-069e-4817-af17-599569791439" />
+
+# Judge Winning Rates
+
+<img width="2700" height="1800" alt="judge_win_rates" src="https://github.com/user-attachments/assets/2177f217-eba1-4927-bdb3-7016cb47693c" />
+
+# 3. Analysis
+
+## Qualitative Comparison Across Checkpoints:
+
+- **CP0 (Base)**: This primarily acted like a standard conversational model.  It was chatty and prone to rambling, and would often ignore the strict formatting constraints.
+- **CP1 (Alapaca Tuned)**: This had a notable improvement in answering general questions directly, however it still often failed at producing well formatted JSON outputs (0% exact match).
+- **CP2 (JSON Tuned)**: This model actively tried to use JSON keys and brackets, but still clung to its base conversational nature, such as "Here is the JSON you requested", which often broke the strict parser.
+
+## Failure Case Analysis
+
+- The 2% JSON validity very much stood out.  While the model did learn JSON structure (given the 100% Schema Compliance when valid), it failed the strict Python json.loads() parser often due to conversational filler.
+- The 1000 samples of Supervised Fine-Tuning (SFT) does not appear to be enough to overwrite the conversational nature of the small model.  Ideally, the SFT would be paired with some constrained decoding libraries to force validity.
+
+## Forgetting vs Retention
+
+- Based on the results, it showed that catastrophic forgetting did not occur.  It was able to retain it's original conversational nature.
+- ROUGE-L stayed stable at  around 17.0 and the Llama 70B judge actually preferred CP2 over CP1 47.5% of the time.
+
+## Implications
+
+- The Stage 2 JSON dataset was generated by a highly capable teacher (Llama-3.3-70B).  However, since the text INSIDE the JSON values contained various complex language, reasoning, and grammar, it might have detracted from the overall JSON structure.  It likely reinforced the conversational capabilities while trying to teach syntax at the same time.  In further attempts, I would make the larger model be far more concise in how it teaches.
+
+# 4. Prompt Engineering
+
+**Teacher Generation Prompts (Imitation Learning):**
+
+- The main idea was to make the prompts as concise and structured as possible.  This was to reduce the inclusion of markdown and chatter that would break the training. 
+> "ONLY output valid JSON. Do not include markdown formatting like ```json. Do not include introductory text."
+- We dynamically passed the 5 required tasks (schema constrained, extraction, exact label, repair, tool call) into the prompt using Python variables ({schema}, {labels}, etc.), to further constrain the prompt.
+
+**Judge Evaluation Prompts:**
+- The judge prompt was specifically designed to output its own strict JSON format so the Python script could parse the scores automatically.
+- We explicitely defined the 6 evaluation criteria (Instruction Following, Correctness, Clarity, Completeness, Structured Output, Hallucination) to force the Llama 70B judge to justify its answers.
+- To help combat the "positional bias" of the LLM, where judges appear to prefer the first response, the python script would randomize wheather CP1 or CP2 was placed in the Response A slot.
+
+**Prompt Failures:**
+- **Judge Explanations Breaking the Parser:** Initially, the judge would output it's JSON scorecard, but then it would add a paragraph explaining its thoughts.  This would break the autoamtic metric calculation.  To fix this, I added another instruction to place this explanation inside the JSON itself (Reasoning), so it would be parsable.
+- **Positional Bias:** Earlier runs showed that the judge skewed toward the first response (Response A) because it was read first.  I was able to get around this by programmatically randomizing the response order.  I would also have the judge calculate the scores for all 6 metrics first, before it was allowed to declare a "winner". 
+
+# Appendix
+
+## Prompts:
+
+```
+{
+  "student_training_schema": {
+    "format": "Instruction: {instruction}\nInput: {input}\nOutput: {output}"
+  },
+  "teacher_generation": {
+    "system_prompt": "You are an expert data generator. Your task is to produce high-quality, valid JSON outputs based on the provided instruction.",
+    "task_extraction": "Extract the key entities, dates, and attributes from the following text into a JSON object. Text: {input}",
+    "task_schema_constrained": "Generate a valid JSON object that strictly conforms to the following schema: {schema}. Context: {input}",
+    "task_exact_label": "Classify the following text and return the result as a JSON object with the key 'classification' and one of the following allowed labels: {labels}. Text: {input}",
+    "task_json_repair": "Fix the following malformed JSON into valid JSON. Malformed JSON: {input}",
+    "task_tool_call": "Produce a JSON object representing a function call to '{function_name}' with the appropriate named parameters based on the following request: {input}"
+  },
+  "judge_evaluation": {
+    "system_prompt": "You are an impartial judge evaluating two responses from an AI model. Evaluate them based on Instruction Following, Correctness, Clarity, Completeness, Structured Output Validity, and Hallucination Risk.",
+    "prompt_template": "Prompt ID: {prompt_id}\nInstruction: {instruction}\n\nResponse A:\n{response_a}\n\nResponse B:\n{response_b}\n\nProvide your evaluation in the following strict JSON schema:\n{\n  \"prompt_id\": \"{prompt_id}\",\n  \"checkpoint_a\": \"{checkpoint_a}\",\n  \"checkpoint_b\": \"{checkpoint_b}\",\n  \"response_a_scores\": {\n    \"instruction_following\": <1-5>,\n    \"correctness\": <1-5>,\n    \"clarity\": <1-5>,\n    \"completeness\": <1-5>,\n    \"structured_output_validity\": <1-5>,\n    \"hallucination_risk\": <1-5>\n  },\n  \"response_b_scores\": {\n    \"instruction_following\": <1-5>,\n    \"correctness\": <1-5>,\n    \"clarity\": <1-5>,\n    \"completeness\": <1-5>,\n    \"structured_output_validity\": <1-5>,\n    \"hallucination_risk\": <1-5>\n  },\n  \"winner\": \"<A or B or Tie>\",\n  \"justification\": \"<short explanation>\"\n}"
+  }
+}
+``` 
+
+## Config
+
+```
+{
+  "models": {
+    "student_model": "microsoft/Phi-3.5-mini-instruct",
+    "teacher_model": "llama-3.3-70b-instruct-awq",
+    "judge_model": "llama-3.3-70b-instruct-awq"
+  },
+  "training": {
+    "fine_tuning_method": "QLoRA",
+    "precision": "4-bit",
+    "learning_rate": 2e-5,
+    "max_sequence_length": 2048,
+    "batch_size": 4,
+    "stage_1_epochs": 3,
+    "stage_2_epochs": 3
+  },
+  "lora": {
+    "rank": 16,
+    "alpha": 32,
+    "dropout": 0.05
+  },
+  "evaluation": {
+    "alpaca_eval_prompts_count": 100,
+    "json_eval_prompts_count": 100
+  },
+  "data_generation": {
+    "target_train_samples": 1000,
+    "target_eval_samples": 100
+  }
+}
+```
+
+# Overly Chatty Training Example:
+
+```
+  {
+    "prompt_id": "prompt_1",
+    "instruction": "What do you understand by AI explainability?",
+    "input": "",
+    "expected_output": "AI explainability refers to the ability to understand and interpret the reasoning and decision-making processes of artificial intelligence systems. It is an essential aspect of building transparent, fair, and trustworthy AI models, as it allows developers, stakeholders, and end-users to gain insights into how an AI system reaches its conclusions, and how it may be improved or refined to better meet intended goals.\n\nIn machine learning-based models, AI explainability can involve examining the weights, biases, and rules that the machine learning algorithm has learned and understanding how the model makes predictions based on input data. In deep learning-based models, the problem of explainability is even more challenging as these models can have millions of parameters and can behave like a 'black box', making it difficult to determine how they make decisions.\n\nExplainability is crucial for building accountable and transparent AI systems and for gaining users' trust. It is also important for regulatory compliance, as some regulations require companies to provide explanations for automated decisions made by AI systems.\n\nIn summary, AI explainability is the ability to interpret and describe the internal workings and decision-making processes of an AI system, making it transparent, trustworthy, and accountable to its users.",
+    "generated_output": "Response:\nOutput: AI explainability refers to the ability to describe how artificial intelligence (AI) systems make decisions or arrive at conclusions. It's a critical aspect of AI transparency and accountability, ensuring that the processes behind AI-driven outcomes are understandable to humans. This involves clear communication of the logic, data, and algorithms that AI models use to process information and generate results.\n\nExplainability is important for several reasons:\n\n1. **Trust**: When users and stakeholders understand how AI systems work, they are more likely to trust and accept their outputs.\n\n2. **Regulatory Compliance**: In many industries, regulations require that automated systems be transparent and explainable, especially when they impact individuals' rights or well-being.\n\n3. **Error Reduction**: Understanding AI decisions can help identify and correct errors or biases in the system, leading to more accurate and fair outcomes.\n\n4. **Improvement**: Explainability allows developers to refine and improve AI models by understanding their strengths and weaknesses.\n\n5. **Ethical Considerations**: It's crucial for ensuring that AI systems operate within ethical boundaries, particularly in sensitive areas like healthcare, finance, and law enforcement.\n\nMethods for achieving AI explainability include:\n\n- **Feature Importance**: Techniques that identify which features in the data are most influential in the model's decision-making process.\n- **Model-agnostic Methods**: Tools that can be applied to any machine learning model to provide insights into its predictions.\n- **Local Interpretable Model-agnostic Explanations (LIME)**: Approaches that approximate the model locally with an interpretable one to explain individual predictions.\n- **SHapley Additive exPlanations (SHAP)**: A method based on game theory that assigns each feature an importance value for a particular prediction.\n- **Counterfactual Explanations**: Describing the smallest change needed in input features to change the outcome, which helps in understanding the decision boundary.\n\nExplainability is an ongoing area of research in AI, as it's challenging to balance complexity and interpretability, especially in complex models like deep neural networks."
+  }
+```
 
 
 
+=======================================================
 
-
-Repository Structure
+# Repository Structure
 
 ```text
 LLM_Training_Project/
